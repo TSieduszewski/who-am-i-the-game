@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { Auth } from "./components/Auth";
+import { Board } from "./components/Board";
 import { MenuBar } from "./components/MenuBar";
 import Cookies from "universal-cookie";
 
@@ -37,7 +38,7 @@ function App() {
     <MenuBar setIsAuth={setIsAuth} />
     <div>
       {room ? (
-        <div>Board</div>
+        <Board />
       ) : (
         <div>
           <label>Choose room:</label>
