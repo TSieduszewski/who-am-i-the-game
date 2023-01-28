@@ -21,11 +21,9 @@ export const Board = (props) => {
       snapshot.forEach((doc) => {
         if (doc.get("playerToken") === cookies.get("auth-token")) {
           setPlayersId(doc.id);
-        }
-        if (doc.get("choosenCharacter") != null) {
-          setPlayerRegistered(true);
-        } else {
-          setPlayerRegistered(false);
+          if (doc.get("choosenCharacter") != null) {
+            setPlayerRegistered(true);
+          }
         }
         tempUsers.push({ ...doc.data(), id: doc.id });
       });
@@ -43,6 +41,6 @@ export const Board = (props) => {
       />
     );
   } else {
-    return <Game playersList={playersList} />;
+    return <Game playersList={playersList} choosenRoom={room} />;
   }
 };

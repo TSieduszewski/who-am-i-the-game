@@ -4,7 +4,6 @@ import { Auth } from "./components/Auth";
 import { Board } from "./components/Board";
 import { MenuBar } from "./components/MenuBar";
 import Cookies from "universal-cookie";
-import { Player } from "./common/Player";
 
 function App() {
   const cookies = new Cookies();

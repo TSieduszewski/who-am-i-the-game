@@ -1,8 +1,7 @@
-import { useState, useCallback } from "react"
+import { useState } from "react"
 import { addDoc, updateDoc, collection, doc } from 'firebase/firestore'
 import { db } from "../configs/firebase-config"
 import Cookies from "universal-cookie";
-import { useEffect } from "react";
 
 export const RegisterPlayer = (props) => {
 
@@ -21,11 +20,15 @@ export const RegisterPlayer = (props) => {
                playerName: cookies.get("auth-name"),
                playerToken: cookies.get("auth-token"),
                room: room,
-               choosenCharacter: character
+               choosenCharacter: character,
+               isGuessed : false,
+               whoGuessed : null
              });
         } else {
             await updateDoc(doc(users, doc.id), {
-                choosenCharacter: character
+                choosenCharacter: character,
+                isGuessed : false,
+                whoGuessed : ""
               })
         }
         setCharacter("")
