@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   collection,
   where,
@@ -7,18 +7,17 @@ import {
   orderBy,
   serverTimestamp,
   addDoc,
-  limitToLast
+  limitToLast,
 } from "firebase/firestore";
 import { db, auth } from "../configs/firebase-config";
 import { LeaveRoom } from "./LeaveRoom";
-import { useContext } from "react";
 import { RoomContext } from "../common/RoomContext";
 
 export const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const allMessages = collection(db, "messages");
-  const {room } = useContext(RoomContext)
+  const { room } = useContext(RoomContext);
 
   useEffect(() => {
     const queryAllMessages = query(
@@ -35,7 +34,7 @@ export const Chat = () => {
       setMessages(tempMessages);
     });
     return () => unsubscribe();
-  },[]);
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
