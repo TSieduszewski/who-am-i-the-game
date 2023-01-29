@@ -2,10 +2,15 @@ import { useState } from "react"
 import { addDoc, updateDoc, collection, doc } from 'firebase/firestore'
 import { db } from "../configs/firebase-config"
 import Cookies from "universal-cookie";
+import { useContext } from "react";
+import { RoomContext } from "../common/RoomContext";
+import { RegisteredPlayerContext } from "../common/RegisteredPlayerContext";
 
 export const RegisterPlayer = (props) => {
 
-    const { playersId, setPlayerRegistered, room  } = props
+    const { playersId } = props
+    const {setPlayerRegistered} = useContext(RegisteredPlayerContext);
+    const {room } = useContext(RoomContext)
     const [ character, setCharacter ] = useState("")
     const users = collection(db, "users")
     const cookies = new Cookies();
@@ -25,7 +30,7 @@ export const RegisterPlayer = (props) => {
                whoGuessed : null
              });
         } else {
-            await updateDoc(doc(users, doc.id), {
+            await updateDoc(doc(users, playersId), {
                 choosenCharacter: character,
                 isGuessed : false,
                 whoGuessed : ""

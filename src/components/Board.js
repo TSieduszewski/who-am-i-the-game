@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RegisterPlayer } from "./RegisterPlayer";
 import { Game } from "./Game";
 import Cookies from "universal-cookie";
-import { useEffect } from "react";
 import { collection, where, query, onSnapshot } from "firebase/firestore";
 import { db } from "../configs/firebase-config";
+import { useContext } from "react";
+import { RoomContext } from "../common/RoomContext";
+import { RegisteredPlayerContext } from "../common/RegisteredPlayerContext";
 
-export const Board = (props) => {
+export const Board = () => {
   const cookies = new Cookies();
-  const { room } = props;
-  const [isPlayerRegistered, setPlayerRegistered] = useState(false);
+  const {room } = useContext(RoomContext)
+  const {isPlayerRegistered, setPlayerRegistered} = useContext(RegisteredPlayerContext);
   const [playersList, setPlayersList] = useState([]);
   const [playersId, setPlayersId] = useState(null);
   const users = collection(db, "users");
@@ -31,16 +33,13 @@ export const Board = (props) => {
     });
   }, []);
 
-  //zacznij grę
   if (!isPlayerRegistered) {
     return (
       <RegisterPlayer
         playersId={playersId}
-        room={room}
-        setPlayerRegistered={setPlayerRegistered}
       />
     );
   } else {
-    return <Game playersList={playersList} choosenRoom={room} />;
+    return <Game playersList={playersList} />;
   }
 };
