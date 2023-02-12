@@ -53,13 +53,13 @@ export const LeaveRoom = () => {
 
   return (
     <span>
-      <button onClick={leaveAndNoClean}>
+      <button className="btn-hover" onClick={leaveAndNoClean}>
         Leave room without deleting your character's choice
       </button>
-      <button onClick={leaveAndClean}>
+      <button className="btn-hover" onClick={leaveAndClean}>
         Leave room and delete your character's choice
       </button>
-      <button onClick={noLeaveAndClean}>Delete your character's choice</button>
+      <button className="btn-hover" onClick={noLeaveAndClean}>Delete your character's choice</button>
     </span>
   );
 };

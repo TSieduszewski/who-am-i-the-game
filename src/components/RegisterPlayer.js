@@ -39,17 +39,24 @@ export const RegisterPlayer = (props) => {
   };
   return (
     <>
-      <div>Choose your character to guess:</div>
-      <form onSubmit={handleChoice}>
+    <h2 className="gradient-multiline">
+        <span>Choose your character to guess:</span>
+    </h2>
+    <div className="container">
+      <div className="container__item">
+      <form className="form" onSubmit={handleChoice}>
         <input
+          className="form__field"
           placeholder="My character to guess is..."
           onChange={(e) => {
             setCharacter(e.target.value);
           }}
           value={character}
         />
-        <button type="submit">Choose</button>
+        <button className="btn btn--primary btn--inside uppercase" type="submit">Choose</button>
       </form>
+      </div>
+    </div>
     </>
   );
 };

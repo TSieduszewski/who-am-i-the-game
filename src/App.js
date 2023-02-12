@@ -29,9 +29,9 @@ function App() {
 
   if (!isAuth) {
     return (
-      <>
+      <div className="logging-screen">
         <Auth setIsAuth={setIsAuth} />
-      </>
+      </div>
     );
   }
 
@@ -47,25 +47,29 @@ function App() {
           </RegisteredPlayerContext.Provider>
         ) : (
           <div>
-            <label>Choose room:</label>
-            <br />
+            <h2 className="gradient-multiline">
+              <span> Choose playroom: </span>
+            </h2>
             <form>
               {checkedList.map(({ id, name, checked }) => (
-                <div key={id}>
+                  <label key={id} className="rad-label">
                   <input
                     type="radio"
                     name="rooms"
+                    className="rad-input"
                     value={name}
                     checked={checked}
                     onChange={(e) => {
                       selectRoom(id, e.target.checked);
                       setTempRoom(e.target.value);
                     }}
-                  />{" "}
-                  {name}
-                </div>
+                  />
+                  <div className="rad-design"></div>
+                  <div className="rad-text">{name}</div>
+                </label>
               ))}
               <button
+              className="btn-hover"
                 onClick={(e) => {
                   setRoom(tempRoom);
                 }}
