@@ -31,9 +31,9 @@ export const MenuBar = (props) => {
   };
 
   return (
-    <>
-      <div>Welcome {displayName}</div>
-      <button onClick={signOutUser}>SIGN OUT</button>
-    </>
+    <div className="menu">
+      <div>Welcome <span className="loggedUser">{displayName}</span></div>
+      <button className="square_btn" onClick={signOutUser}>SIGN OUT</button>
+    </div>
   );
 };

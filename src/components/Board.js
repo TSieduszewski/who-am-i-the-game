@@ -36,16 +36,19 @@ export const Board = () => {
   };
 
   useEffect(() => {
+    setPlayerRegistered(false);
     const queryUsers = query(users, where("room", "==", room));
     onSnapshot(queryUsers, (snapshot) => {
       let tempUsers = [];
       snapshot.forEach((doc) => {
+        
         if (doc.get("playerToken") === cookies.get("auth-token")) {
           setPlayersId(doc.id);
+          
           if (doc.get("choosenCharacter") != null) {
             setPlayerRegistered(true);
-          }
-        }
+          } 
+        } 
         tempUsers.push({ ...doc.data(), id: doc.id });
       });
       clearAllMessages(tempUsers.length);

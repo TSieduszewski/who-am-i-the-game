@@ -19,8 +19,9 @@ export const Auth = (props) => {
 
   return (
     <div>
+      <h1>Welcome to the 'Who am I the game'</h1>
       <p>Sign in with Google</p>
-      <button onClick={signInWithGoogle}>Sign In</button>
+      <button className ="login-with-google-btn" onClick={signInWithGoogle}>Sign In</button>
     </div>
   );
 };

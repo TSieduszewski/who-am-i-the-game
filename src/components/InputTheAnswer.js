@@ -7,7 +7,7 @@ export const InputTheAnswer = (props) => {
   const cookies = new Cookies();
   const { id, choosenCharacter } = props;
   const [answer, setAnswer] = useState("");
-  const [placeholder, setPlaceholder] = useState("My guess is...");
+  const [placeholder, setPlaceholder] = useState(" My guess is...");
   const users = collection(db, "users");
 
   const handlePlaceholder = () => {
@@ -36,17 +36,22 @@ export const InputTheAnswer = (props) => {
   };
 
   return (
-    <span>
-      <form onSubmit={handleAnswer}>
-        <input
-          placeholder={placeholder}
-          onChange={(e) => {
-            setAnswer(e.target.value);
-          }}
-          value={answer}
-        ></input>
-        <button type="submit">Try!</button>
-      </form>
-    </span>
+    <>
+      <div className="containerplayer">
+        <div className="container__item">
+          <form className="form" onSubmit={handleAnswer}>
+            <input
+              className="form__field status"
+              placeholder={placeholder}
+              onChange={(e) => {
+                setAnswer(e.target.value);
+              }}
+              value={answer}
+            ></input>
+            <button className="btn btn--primary btn--inside btnstatus uppercase" type="submit">Try!</button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };

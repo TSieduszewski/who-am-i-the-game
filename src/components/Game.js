@@ -11,8 +11,15 @@ export const Game = (props) => {
   const theRoom = room;
   return (
     <div>
-      <label>Players in the room:</label>
-      <br />
+      <h2 className="gradient-multiline">
+        <span>Players in the room:</span>
+      </h2>
+      <div className="rounded-div">
+      <div className="thecontainer">
+        <span className="rad-text">Player</span>
+        <span className="rad-text">Chosen character</span>
+        <span className="rad-text">Status</span>
+      </div>
       {playersList.map(
         ({
           id,
@@ -23,32 +30,33 @@ export const Game = (props) => {
           room,
           whoGuessed,
         }) => (
-          <div key={id}>
-            <span>{playerName}</span>
-            <span>
-              {isGuessed ||
-              (playerToken === cookies.get("auth-token") && theRoom === room)
-                ? choosenCharacter
-                : "*****"}
-            </span>
-            {!isGuessed &&
-            playerToken !== cookies.get("auth-token") &&
-            theRoom === room ? (
-              <InputTheAnswer id={id} choosenCharacter={choosenCharacter} />
-            ) : (
-              <>
-                {playerToken === cookies.get("auth-token") &&
-                theRoom === room ? (
-                  <span>This is your character</span>
-                ) : (
-                  <span>Guessed by {whoGuessed}!</span>
-                )}
-              </>
-            )}
-          </div>
+            <div className="thecontainer" key={id}>
+              <span className={`rad-text player ${((playerToken === cookies.get('auth-token') && theRoom === room) || isGuessed) ? ' guessed' : ''}`}>{playerName}</span>
+              
+                {isGuessed ||
+                (playerToken === cookies.get("auth-token") && theRoom === room)
+                  ? <span className="rad-text player guessed">{choosenCharacter}</span>
+                  : <span className="rad-text player">*****</span>}
+              
+              {!isGuessed &&
+              playerToken !== cookies.get("auth-token") &&
+              theRoom === room ? (
+                <InputTheAnswer id={id} choosenCharacter={choosenCharacter} />
+              ) : (
+                <span>
+                  {playerToken === cookies.get("auth-token") &&
+                  theRoom === room ? (
+                    <span className="rad-text player guessed">This is your character</span>
+                  ) : (
+                    <span className="rad-text player guessed">Guessed by {whoGuessed}!</span>
+                  )}
+                </span>
+              )}
+            </div>
+          
         )
       )}
-      <br />
+      </div>
       <Chat />
     </div>
   );
