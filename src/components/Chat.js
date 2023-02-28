@@ -12,6 +12,8 @@ import {
 import { db, auth } from "../configs/firebase-config";
 import { LeaveRoom } from "./LeaveRoom";
 import { RoomContext } from "../common/RoomContext";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 export const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -51,6 +53,7 @@ export const Chat = () => {
       createdAt: serverTimestamp(),
       user: auth.currentUser.displayName,
       room: room,
+      playerToken: cookies.get("auth-token")
     });
 
     setNewMessage("");

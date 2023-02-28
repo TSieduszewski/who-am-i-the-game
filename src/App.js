@@ -72,6 +72,7 @@ function App() {
               className="btn-hover"
                 onClick={(e) => {
                   setRoom(tempRoom);
+                  setTempRoom(null)
                 }}
                 disabled={tempRoom == null}
               >

@@ -20,11 +20,24 @@ export const MenuBar = (props) => {
       user,
       where("playerToken", "==", cookies.get("auth-token"))
     );
+
     const snapshot = await getDocs(queryUser);
+    console.log(snapshot.size)
     snapshot.forEach((doc) => {
       deleteDoc(doc.ref);
     });
     setIsAuth(false);
+
+    const messages = collection(db, "messages")
+    const queryMessages = query(
+      user,
+      where("playerToken", "==", cookies.get("auth-token"))
+    );
+    const messageSnapshot = await getDocs(queryMessages);
+    console.log(messageSnapshot.size)
+    messageSnapshot.forEach((doc) => {
+      deleteDoc(doc.ref);
+    });
     cookies.remove("auth-name");
     cookies.remove("auth-token");
     window.location.reload(true);
