@@ -30,7 +30,7 @@ export const MenuBar = (props) => {
 
     const messages = collection(db, "messages")
     const queryMessages = query(
-      user,
+      messages,
       where("playerToken", "==", cookies.get("auth-token"))
     );
     const messageSnapshot = await getDocs(queryMessages);
